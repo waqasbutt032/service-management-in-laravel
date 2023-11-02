@@ -9,7 +9,9 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     public function index() {
-        return view('products.index');
+        return view('products.index', [
+            'products' => Product::get()
+        ]);
     }
 
     public function create() {

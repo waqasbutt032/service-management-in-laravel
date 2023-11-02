@@ -29,7 +29,28 @@
 		</div>
 	</div>
 	<div class="container">
-		<h1>Products</h1>
+		<table class="table table-hover mt-2">
+		    <thead>
+				<tr>
+					<th>Sr.</th>
+					<th>Name</th>
+					<th>Image</th>
+					<th>Action</th>
+				</tr>
+		    </thead>
+		    <tbody>
+		    	@foreach($products as $product)
+					<tr>
+						<td>{{ $loop->index + 1 }}</td>
+						<td>{{ $product->name }}</td>
+						<td>
+							<img src="products/{{ $product->image }}" class="rounded-circle" width="30px" height="30px" />
+						</td>
+						<td>Edit</td>
+					</tr>
+				@endforeach
+		    </tbody>
+		  </table>
 	</div>
 </body>
 </html>
