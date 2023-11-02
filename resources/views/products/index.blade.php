@@ -25,7 +25,7 @@
 
 	<div class="container">
 		<div class="text-right">
-			<a href="product/create" class="btn btn-info mt-2" role="button">New Product</a>
+			<a href="products/create" class="btn btn-info mt-2" role="button">New Product</a>
 		</div>
 	</div>
 	<div class="container">
