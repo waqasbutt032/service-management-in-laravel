@@ -18,6 +18,13 @@ class ProductController extends Controller
 
     public function store(Request $request) {
 
+        // validate data
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'image' => 'required|mimes:jpeg,jpg,png,gif|max:10000'
+        ]);
+
         // upload image to public path
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('products'), $imageName);
@@ -29,6 +36,6 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->save();
 
-        return back();
+        return back()->withSuccess('Product added successfully');
     }
 }
