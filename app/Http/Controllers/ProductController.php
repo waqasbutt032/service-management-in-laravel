@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index() {
         return view('products.index', [
-            'products' => Product::get()
+            'products' => Product::paginate(3)
         ]);
     }
 
@@ -76,5 +76,10 @@ class ProductController extends Controller
         $product = Product::where('id', $id)->first();
         $product->delete();
         return back()->withSuccess('Product deleted successfully');
+    }
+
+    public function show($id) {
+        $product = Product::where('id', $id)->first();
+        return view('products.show', ['product' => $product]);        
     }
 }
