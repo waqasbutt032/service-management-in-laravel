@@ -42,7 +42,7 @@
 	<div class="container text-center">
 		<div class="col-12">
 			<div class="row mt-3">
-				@foreach($products as $product)
+				@foreach($allProducts as $product)
 					<div class="col-lg-3">
 							<img src="products/{{ $product->image }}" width="200px" height="200px" />
 							<h5>{{ $product->name }}</h5>

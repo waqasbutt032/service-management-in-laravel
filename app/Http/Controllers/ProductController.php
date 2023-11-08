@@ -11,22 +11,25 @@ class ProductController extends Controller
     public function index() {
         // Retrieve paginated products
         $products = Product::paginate(3);
-    
+
         // Calculate the starting serial number for the current page
         $currentPage = $products->currentPage();
         $perPage = $products->perPage();
         $startingSerialNumber = ($currentPage - 1) * $perPage + 1;
-    
+
         // Add a serial number (count) to each product
         $products->getCollection()->transform(function ($product) use (&$startingSerialNumber) {
             $product->count = $startingSerialNumber++;
             return $product;
         });
-    
+
+        $allProducts = Product::all();
+
         return view('products.index', [
             'products' => $products,
+            'allProducts' => $allProducts
         ]);
-    }    
+    }
 
     public function create() {
         return view('products.create');
@@ -94,6 +97,6 @@ class ProductController extends Controller
 
     public function show($id) {
         $product = Product::where('id', $id)->first();
-        return view('products.show', ['product' => $product]);        
+        return view('products.show', ['product' => $product]);
     }
 }
