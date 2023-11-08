@@ -9,10 +9,24 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     public function index() {
+        // Retrieve paginated products
+        $products = Product::paginate(3);
+    
+        // Calculate the starting serial number for the current page
+        $currentPage = $products->currentPage();
+        $perPage = $products->perPage();
+        $startingSerialNumber = ($currentPage - 1) * $perPage + 1;
+    
+        // Add a serial number (count) to each product
+        $products->getCollection()->transform(function ($product) use (&$startingSerialNumber) {
+            $product->count = $startingSerialNumber++;
+            return $product;
+        });
+    
         return view('products.index', [
-            'products' => Product::paginate(3)
+            'products' => $products,
         ]);
-    }
+    }    
 
     public function create() {
         return view('products.create');

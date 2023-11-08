@@ -19,7 +19,7 @@
 		    <tbody>
 		    	@foreach($products as $product)
 					<tr>
-						<td>{{ $loop->index + 1 }}</td>
+						<td>{{ $product->count }}</td>
 						<td><a href="products/{{ $product->id }}/show" class="text-dark">{{ $product->name }}</a></td>
 						<td>
 							<img src="products/{{ $product->image }}" class="rounded-circle" width="30px" height="30px" />
@@ -38,5 +38,18 @@
 		  </table>
 
 		  {{ $products->links() }}
+	</div>
+	<div class="container text-center">
+		<div class="col-12">
+			<div class="row mt-3">
+				@foreach($products as $product)
+					<div class="col-lg-3">
+							<img src="products/{{ $product->image }}" width="200px" height="200px" />
+							<h5>{{ $product->name }}</h5>
+							<h6>{{ $product->description }}</h6>
+					</div>
+				@endforeach
+			</div>
+		</div>
 	</div>
 @endsection
